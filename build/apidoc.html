@@ -1,0 +1,1557 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="https://github.com/dbader/node-datadog-metrics#readme"
+
+    >datadog-metrics (v0.4.0)</a>
+</h1>
+<h4>Buffered metrics reporting via the DataDog HTTP API</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.datadog-metrics">module datadog-metrics</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.BufferedMetricsLogger">
+            function <span class="apidocSignatureSpan">datadog-metrics.</span>BufferedMetricsLogger
+            <span class="apidocSignatureSpan">(opts)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.addPoint">
+            function <span class="apidocSignatureSpan">datadog-metrics.</span>BufferedMetricsLogger.prototype.addPoint
+            <span class="apidocSignatureSpan">(Type, key, value, tags)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.flush">
+            function <span class="apidocSignatureSpan">datadog-metrics.</span>BufferedMetricsLogger.prototype.flush
+            <span class="apidocSignatureSpan">(onSuccess, onError)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.gauge">
+            function <span class="apidocSignatureSpan">datadog-metrics.</span>BufferedMetricsLogger.prototype.gauge
+            <span class="apidocSignatureSpan">(key, value, tags)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.histogram">
+            function <span class="apidocSignatureSpan">datadog-metrics.</span>BufferedMetricsLogger.prototype.histogram
+            <span class="apidocSignatureSpan">(key, value, tags)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.increment">
+            function <span class="apidocSignatureSpan">datadog-metrics.</span>BufferedMetricsLogger.prototype.increment
+            <span class="apidocSignatureSpan">(key, value, tags)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.flush">
+            function <span class="apidocSignatureSpan">datadog-metrics.</span>flush
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.gauge">
+            function <span class="apidocSignatureSpan">datadog-metrics.</span>gauge
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.histogram">
+            function <span class="apidocSignatureSpan">datadog-metrics.</span>histogram
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.increment">
+            function <span class="apidocSignatureSpan">datadog-metrics.</span>increment
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.init">
+            function <span class="apidocSignatureSpan">datadog-metrics.</span>init
+            <span class="apidocSignatureSpan">(opts)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">datadog-metrics.</span>BufferedMetricsLogger.prototype</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">datadog-metrics.</span>aggregators</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">datadog-metrics.</span>loggers</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">datadog-metrics.</span>metrics</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">datadog-metrics.</span>reporters</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.datadog-metrics.BufferedMetricsLogger">module datadog-metrics.BufferedMetricsLogger</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.BufferedMetricsLogger">
+            function <span class="apidocSignatureSpan">datadog-metrics.</span>BufferedMetricsLogger
+            <span class="apidocSignatureSpan">(opts)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.datadog-metrics.BufferedMetricsLogger.prototype">module datadog-metrics.BufferedMetricsLogger.prototype</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.addPoint">
+            function <span class="apidocSignatureSpan">datadog-metrics.BufferedMetricsLogger.prototype.</span>addPoint
+            <span class="apidocSignatureSpan">(Type, key, value, tags)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.flush">
+            function <span class="apidocSignatureSpan">datadog-metrics.BufferedMetricsLogger.prototype.</span>flush
+            <span class="apidocSignatureSpan">(onSuccess, onError)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.gauge">
+            function <span class="apidocSignatureSpan">datadog-metrics.BufferedMetricsLogger.prototype.</span>gauge
+            <span class="apidocSignatureSpan">(key, value, tags)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.histogram">
+            function <span class="apidocSignatureSpan">datadog-metrics.BufferedMetricsLogger.prototype.</span>histogram
+            <span class="apidocSignatureSpan">(key, value, tags)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.increment">
+            function <span class="apidocSignatureSpan">datadog-metrics.BufferedMetricsLogger.prototype.</span>increment
+            <span class="apidocSignatureSpan">(key, value, tags)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.datadog-metrics.BufferedMetricsLogger.prototype.addPoint">module datadog-metrics.BufferedMetricsLogger.prototype.addPoint</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.addPoint.addPoint">
+            function <span class="apidocSignatureSpan">datadog-metrics.BufferedMetricsLogger.prototype.</span>addPoint
+            <span class="apidocSignatureSpan">(Type, key, value, tags)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.datadog-metrics.BufferedMetricsLogger.prototype.flush">module datadog-metrics.BufferedMetricsLogger.prototype.flush</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.flush.flush">
+            function <span class="apidocSignatureSpan">datadog-metrics.BufferedMetricsLogger.prototype.</span>flush
+            <span class="apidocSignatureSpan">(onSuccess, onError)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.datadog-metrics.BufferedMetricsLogger.prototype.gauge">module datadog-metrics.BufferedMetricsLogger.prototype.gauge</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.gauge.gauge">
+            function <span class="apidocSignatureSpan">datadog-metrics.BufferedMetricsLogger.prototype.</span>gauge
+            <span class="apidocSignatureSpan">(key, value, tags)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.datadog-metrics.BufferedMetricsLogger.prototype.histogram">module datadog-metrics.BufferedMetricsLogger.prototype.histogram</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.histogram.histogram">
+            function <span class="apidocSignatureSpan">datadog-metrics.BufferedMetricsLogger.prototype.</span>histogram
+            <span class="apidocSignatureSpan">(key, value, tags)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.datadog-metrics.BufferedMetricsLogger.prototype.increment">module datadog-metrics.BufferedMetricsLogger.prototype.increment</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.increment.increment">
+            function <span class="apidocSignatureSpan">datadog-metrics.BufferedMetricsLogger.prototype.</span>increment
+            <span class="apidocSignatureSpan">(key, value, tags)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.datadog-metrics.aggregators">module datadog-metrics.aggregators</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.aggregators.Aggregator">
+            function <span class="apidocSignatureSpan">datadog-metrics.aggregators.</span>Aggregator
+            <span class="apidocSignatureSpan">(defaultTags)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.datadog-metrics.flush">module datadog-metrics.flush</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.flush.flush">
+            function <span class="apidocSignatureSpan">datadog-metrics.</span>flush
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.datadog-metrics.gauge">module datadog-metrics.gauge</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.gauge.gauge">
+            function <span class="apidocSignatureSpan">datadog-metrics.</span>gauge
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.datadog-metrics.histogram">module datadog-metrics.histogram</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.histogram.histogram">
+            function <span class="apidocSignatureSpan">datadog-metrics.</span>histogram
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.datadog-metrics.increment">module datadog-metrics.increment</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.increment.increment">
+            function <span class="apidocSignatureSpan">datadog-metrics.</span>increment
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.datadog-metrics.init">module datadog-metrics.init</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.init.init">
+            function <span class="apidocSignatureSpan">datadog-metrics.</span>init
+            <span class="apidocSignatureSpan">(opts)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.datadog-metrics.loggers">module datadog-metrics.loggers</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.loggers.BufferedMetricsLogger">
+            function <span class="apidocSignatureSpan">datadog-metrics.loggers.</span>BufferedMetricsLogger
+            <span class="apidocSignatureSpan">(opts)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.datadog-metrics.metrics">module datadog-metrics.metrics</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.metrics.Counter">
+            function <span class="apidocSignatureSpan">datadog-metrics.metrics.</span>Counter
+            <span class="apidocSignatureSpan">(key, tags, host)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.metrics.Gauge">
+            function <span class="apidocSignatureSpan">datadog-metrics.metrics.</span>Gauge
+            <span class="apidocSignatureSpan">(key, tags, host)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.metrics.Histogram">
+            function <span class="apidocSignatureSpan">datadog-metrics.metrics.</span>Histogram
+            <span class="apidocSignatureSpan">(key, tags, host)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.metrics.Metric">
+            function <span class="apidocSignatureSpan">datadog-metrics.metrics.</span>Metric
+            <span class="apidocSignatureSpan">(key, tags, host)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.datadog-metrics.reporters">module datadog-metrics.reporters</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.reporters.DataDogReporter">
+            function <span class="apidocSignatureSpan">datadog-metrics.reporters.</span>DataDogReporter
+            <span class="apidocSignatureSpan">(apiKey, appKey)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.datadog-metrics.reporters.NullReporter">
+            function <span class="apidocSignatureSpan">datadog-metrics.reporters.</span>NullReporter
+            <span class="apidocSignatureSpan">(apiKey, appKey)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.datadog-metrics" id="apidoc.module.datadog-metrics">module datadog-metrics</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.BufferedMetricsLogger" id="apidoc.element.datadog-metrics.BufferedMetricsLogger">
+        function <span class="apidocSignatureSpan">datadog-metrics.</span>BufferedMetricsLogger
+        <span class="apidocSignatureSpan">(opts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function BufferedMetricsLogger(opts) {
+    this.aggregator = opts.aggregator || new Aggregator(opts.defaultTags);
+    this.reporter = opts.reporter || new DataDogReporter(opts.apiKey, opts.appKey);
+    this.host = opts.host;
+    this.prefix = opts.prefix || &#x27;&#x27;;
+    this.flushIntervalSeconds = opts.flushIntervalSeconds;
+
+    if (this.flushIntervalSeconds) {
+        debug(&#x27;Auto-flushing every %d seconds&#x27;, this.flushIntervalSeconds);
+    } else {
+        debug(&#x27;Auto-flushing is disabled&#x27;);
+    }
+
+    var self = this;
+    var autoFlushCallback = function() {
+        self.flush();
+        if (self.flushIntervalSeconds) {
+            var interval = self.flushIntervalSeconds * 1000;
+            var tid = setTimeout(autoFlushCallback, interval);
+            // Let the event loop exit if this is the only active timer.
+            tid.unref();
+        }
+    };
+
+    autoFlushCallback();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+#### Use case #3: Must. Control. Everything.
+
+If you need even more control you can create one or more `BufferedMetricsLogger` instances and manage them yourself:
+
+```js
+var metrics = require(&#x27;datadog-metrics&#x27;);
+var metricsLogger = new metrics.<span class="apidocCodeKeywordSpan">BufferedMetricsLogger</span>({
+    apiKey: &#x27;TESTKEY&#x27;,
+    host: &#x27;myhost&#x27;,
+    prefix: &#x27;myapp.&#x27;,
+    flushIntervalSeconds: 15,
+    defaultTags: [&#x27;env:staging&#x27;, &#x27;region:us-east-1&#x27;]
+});
+metricsLogger.gauge(&#x27;mygauge&#x27;, 42);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.addPoint" id="apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.addPoint">
+        function <span class="apidocSignatureSpan">datadog-metrics.</span>BufferedMetricsLogger.prototype.addPoint
+        <span class="apidocSignatureSpan">(Type, key, value, tags)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">BufferedMetricsLogger.prototype.addPoint = function (Type, key, value, tags) {
+    this.aggregator.addPoint(Type, this.prefix + key, value, tags, this.host);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.flush" id="apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.flush">
+        function <span class="apidocSignatureSpan">datadog-metrics.</span>BufferedMetricsLogger.prototype.flush
+        <span class="apidocSignatureSpan">(onSuccess, onError)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">BufferedMetricsLogger.prototype.flush = function (onSuccess, onError) {
+    var series = this.aggregator.flush();
+    if (series.length &#x3e; 0) {
+        debug(&#x27;Flushing %d metrics to DataDog&#x27;, series.length);
+        this.reporter.report(series, onSuccess, onError);
+    } else {
+        debug(&#x27;Nothing to flush&#x27;);
+    }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.gauge" id="apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.gauge">
+        function <span class="apidocSignatureSpan">datadog-metrics.</span>BufferedMetricsLogger.prototype.gauge
+        <span class="apidocSignatureSpan">(key, value, tags)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">BufferedMetricsLogger.prototype.gauge = function (key, value, tags) {
+    this.addPoint(Gauge, key, value, tags);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.histogram" id="apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.histogram">
+        function <span class="apidocSignatureSpan">datadog-metrics.</span>BufferedMetricsLogger.prototype.histogram
+        <span class="apidocSignatureSpan">(key, value, tags)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">BufferedMetricsLogger.prototype.histogram = function (key, value, tags) {
+    this.addPoint(Histogram, key, value, tags);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.increment" id="apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.increment">
+        function <span class="apidocSignatureSpan">datadog-metrics.</span>BufferedMetricsLogger.prototype.increment
+        <span class="apidocSignatureSpan">(key, value, tags)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">BufferedMetricsLogger.prototype.increment = function (key, value, tags) {
+    this.addPoint(Counter, key, value || 1, tags);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.flush" id="apidoc.element.datadog-metrics.flush">
+        function <span class="apidocSignatureSpan">datadog-metrics.</span>flush
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">flush = function () { [native code] }</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+```js
+metrics.histogram(&#x27;test.service_time&#x27;, 0.248);
+```
+
+### Flushing
+
+`metrics.<span class="apidocCodeKeywordSpan">flush</span>([onSuccess[, onError]])`
+
+Calling `flush` sends any buffered metrics to DataDog. Unless you set
+`flushIntervalSeconds` to 0 it won&#x27;t be necessary to call this function.
+
+It can be useful to trigger a manual flush by calling if you want to
+make sure pending metrics have been sent before you quit the application
+process, for example.
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.gauge" id="apidoc.element.datadog-metrics.gauge">
+        function <span class="apidocSignatureSpan">datadog-metrics.</span>gauge
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">gauge = function () { [native code] }</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+Save the following into a file named `example_app.js`:
+```js
+var metrics = require(&#x27;datadog-metrics&#x27;);
+metrics.init({ host: &#x27;myhost&#x27;, prefix: &#x27;myapp.&#x27; });
+
+function collectMemoryStats() {
+    var memUsage = process.memoryUsage();
+    metrics.<span class="apidocCodeKeywordSpan">gauge</span>(&#x27;memory.rss&#x27;, memUsage.rss);
+    metrics.gauge(&#x27;memory.heapTotal&#x27;, memUsage.heapTotal);
+    metrics.gauge(&#x27;memory.heapUsed&#x27;, memUsage.heapUsed);
+};
+
+setInterval(collectMemoryStats, 5000);
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.histogram" id="apidoc.element.datadog-metrics.histogram">
+        function <span class="apidocSignatureSpan">datadog-metrics.</span>histogram
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">histogram = function () { [native code] }</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+```js
+metrics.increment(&#x27;test.requests_served&#x27;);
+metrics.increment(&#x27;test.awesomeness_factor&#x27;, 10);
+```
+
+### Histograms
+
+`metrics.<span class="apidocCodeKeywordSpan">histogram</span>(key, value[, tags])`
+
+Sample a histogram value. Histograms will produce metrics that
+describe the distribution of the recorded values, namely the minimum,
+maximum, average, count and the 75th, 85th, 95th and 99th percentiles.
+Optionally, specify a list of *tags* to associate with the metric.
+
+Example:
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.increment" id="apidoc.element.datadog-metrics.increment">
+        function <span class="apidocSignatureSpan">datadog-metrics.</span>increment
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">increment = function () { [native code] }</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+```js
+metrics.gauge(&#x27;test.mem_free&#x27;, 23);
+```
+
+### Counters
+
+`metrics.<span class="apidocCodeKeywordSpan">increment</span>(key[, value[, tags]])`
+
+Increment the counter by the given *value* (or `1` by default). Optionally,
+specify a list of *tags* to associate with the metric. This is useful for
+counting things such as incrementing a counter each time a page is requested.
+
+Example:
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.init" id="apidoc.element.datadog-metrics.init">
+        function <span class="apidocSignatureSpan">datadog-metrics.</span>init
+        <span class="apidocSignatureSpan">(opts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function init(opts) {
+    opts = opts || {};
+    opts.flushIntervalSeconds = opts.flushIntervalSeconds || 15;
+    sharedLogger = new loggers.BufferedMetricsLogger(opts);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+## Example
+
+![](header.png)
+
+Save the following into a file named `example_app.js`:
+```js
+var metrics = require(&#x27;datadog-metrics&#x27;);
+metrics.<span class="apidocCodeKeywordSpan">init</span>({ host: &#x27;myhost&#x27;, prefix: &#x27;myapp.&#x27; });
+
+function collectMemoryStats() {
+    var memUsage = process.memoryUsage();
+    metrics.gauge(&#x27;memory.rss&#x27;, memUsage.rss);
+    metrics.gauge(&#x27;memory.heapTotal&#x27;, memUsage.heapTotal);
+    metrics.gauge(&#x27;memory.heapUsed&#x27;, memUsage.heapUsed);
+};
+...</pre></li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.datadog-metrics.BufferedMetricsLogger" id="apidoc.module.datadog-metrics.BufferedMetricsLogger">module datadog-metrics.BufferedMetricsLogger</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.BufferedMetricsLogger" id="apidoc.element.datadog-metrics.BufferedMetricsLogger.BufferedMetricsLogger">
+        function <span class="apidocSignatureSpan">datadog-metrics.</span>BufferedMetricsLogger
+        <span class="apidocSignatureSpan">(opts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function BufferedMetricsLogger(opts) {
+    this.aggregator = opts.aggregator || new Aggregator(opts.defaultTags);
+    this.reporter = opts.reporter || new DataDogReporter(opts.apiKey, opts.appKey);
+    this.host = opts.host;
+    this.prefix = opts.prefix || &#x27;&#x27;;
+    this.flushIntervalSeconds = opts.flushIntervalSeconds;
+
+    if (this.flushIntervalSeconds) {
+        debug(&#x27;Auto-flushing every %d seconds&#x27;, this.flushIntervalSeconds);
+    } else {
+        debug(&#x27;Auto-flushing is disabled&#x27;);
+    }
+
+    var self = this;
+    var autoFlushCallback = function() {
+        self.flush();
+        if (self.flushIntervalSeconds) {
+            var interval = self.flushIntervalSeconds * 1000;
+            var tid = setTimeout(autoFlushCallback, interval);
+            // Let the event loop exit if this is the only active timer.
+            tid.unref();
+        }
+    };
+
+    autoFlushCallback();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+#### Use case #3: Must. Control. Everything.
+
+If you need even more control you can create one or more `BufferedMetricsLogger` instances and manage them yourself:
+
+```js
+var metrics = require(&#x27;datadog-metrics&#x27;);
+var metricsLogger = new metrics.<span class="apidocCodeKeywordSpan">BufferedMetricsLogger</span>({
+    apiKey: &#x27;TESTKEY&#x27;,
+    host: &#x27;myhost&#x27;,
+    prefix: &#x27;myapp.&#x27;,
+    flushIntervalSeconds: 15,
+    defaultTags: [&#x27;env:staging&#x27;, &#x27;region:us-east-1&#x27;]
+});
+metricsLogger.gauge(&#x27;mygauge&#x27;, 42);
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.datadog-metrics.BufferedMetricsLogger.prototype" id="apidoc.module.datadog-metrics.BufferedMetricsLogger.prototype">module datadog-metrics.BufferedMetricsLogger.prototype</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.addPoint" id="apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.addPoint">
+        function <span class="apidocSignatureSpan">datadog-metrics.BufferedMetricsLogger.prototype.</span>addPoint
+        <span class="apidocSignatureSpan">(Type, key, value, tags)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">addPoint = function (Type, key, value, tags) {
+    this.aggregator.addPoint(Type, this.prefix + key, value, tags, this.host);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+Aggregator.prototype.addPoint = function(Type, key, value, tags, host) {
+var bufferKey = this.makeBufferKey(key, tags);
+if (!this.buffer.hasOwnProperty(bufferKey)) {
+    this.buffer[bufferKey] = new Type(key, tags, host);
+}
+
+this.buffer[bufferKey].<span class="apidocCodeKeywordSpan">addPoint</span>(value);
+};
+
+Aggregator.prototype.flush = function() {
+var series = [];
+for (var key in this.buffer) {
+    if (this.buffer.hasOwnProperty(key)) {
+        series = series.concat(this.buffer[key].flush());
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.flush" id="apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.flush">
+        function <span class="apidocSignatureSpan">datadog-metrics.BufferedMetricsLogger.prototype.</span>flush
+        <span class="apidocSignatureSpan">(onSuccess, onError)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">flush = function (onSuccess, onError) {
+    var series = this.aggregator.flush();
+    if (series.length &#x3e; 0) {
+        debug(&#x27;Flushing %d metrics to DataDog&#x27;, series.length);
+        this.reporter.report(series, onSuccess, onError);
+    } else {
+        debug(&#x27;Nothing to flush&#x27;);
+    }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+```js
+metrics.histogram(&#x27;test.service_time&#x27;, 0.248);
+```
+
+### Flushing
+
+`metrics.<span class="apidocCodeKeywordSpan">flush</span>([onSuccess[, onError]])`
+
+Calling `flush` sends any buffered metrics to DataDog. Unless you set
+`flushIntervalSeconds` to 0 it won&#x27;t be necessary to call this function.
+
+It can be useful to trigger a manual flush by calling if you want to
+make sure pending metrics have been sent before you quit the application
+process, for example.
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.gauge" id="apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.gauge">
+        function <span class="apidocSignatureSpan">datadog-metrics.BufferedMetricsLogger.prototype.</span>gauge
+        <span class="apidocSignatureSpan">(key, value, tags)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">gauge = function (key, value, tags) {
+    this.addPoint(Gauge, key, value, tags);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+Save the following into a file named `example_app.js`:
+```js
+var metrics = require(&#x27;datadog-metrics&#x27;);
+metrics.init({ host: &#x27;myhost&#x27;, prefix: &#x27;myapp.&#x27; });
+
+function collectMemoryStats() {
+    var memUsage = process.memoryUsage();
+    metrics.<span class="apidocCodeKeywordSpan">gauge</span>(&#x27;memory.rss&#x27;, memUsage.rss);
+    metrics.gauge(&#x27;memory.heapTotal&#x27;, memUsage.heapTotal);
+    metrics.gauge(&#x27;memory.heapUsed&#x27;, memUsage.heapUsed);
+};
+
+setInterval(collectMemoryStats, 5000);
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.histogram" id="apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.histogram">
+        function <span class="apidocSignatureSpan">datadog-metrics.BufferedMetricsLogger.prototype.</span>histogram
+        <span class="apidocSignatureSpan">(key, value, tags)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">histogram = function (key, value, tags) {
+    this.addPoint(Histogram, key, value, tags);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+```js
+metrics.increment(&#x27;test.requests_served&#x27;);
+metrics.increment(&#x27;test.awesomeness_factor&#x27;, 10);
+```
+
+### Histograms
+
+`metrics.<span class="apidocCodeKeywordSpan">histogram</span>(key, value[, tags])`
+
+Sample a histogram value. Histograms will produce metrics that
+describe the distribution of the recorded values, namely the minimum,
+maximum, average, count and the 75th, 85th, 95th and 99th percentiles.
+Optionally, specify a list of *tags* to associate with the metric.
+
+Example:
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.increment" id="apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.increment">
+        function <span class="apidocSignatureSpan">datadog-metrics.BufferedMetricsLogger.prototype.</span>increment
+        <span class="apidocSignatureSpan">(key, value, tags)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">increment = function (key, value, tags) {
+    this.addPoint(Counter, key, value || 1, tags);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+```js
+metrics.gauge(&#x27;test.mem_free&#x27;, 23);
+```
+
+### Counters
+
+`metrics.<span class="apidocCodeKeywordSpan">increment</span>(key[, value[, tags]])`
+
+Increment the counter by the given *value* (or `1` by default). Optionally,
+specify a list of *tags* to associate with the metric. This is useful for
+counting things such as incrementing a counter each time a page is requested.
+
+Example:
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.datadog-metrics.BufferedMetricsLogger.prototype.addPoint" id="apidoc.module.datadog-metrics.BufferedMetricsLogger.prototype.addPoint">module datadog-metrics.BufferedMetricsLogger.prototype.addPoint</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.addPoint.addPoint" id="apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.addPoint.addPoint">
+        function <span class="apidocSignatureSpan">datadog-metrics.BufferedMetricsLogger.prototype.</span>addPoint
+        <span class="apidocSignatureSpan">(Type, key, value, tags)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">addPoint = function (Type, key, value, tags) {
+    this.aggregator.addPoint(Type, this.prefix + key, value, tags, this.host);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+Aggregator.prototype.addPoint = function(Type, key, value, tags, host) {
+var bufferKey = this.makeBufferKey(key, tags);
+if (!this.buffer.hasOwnProperty(bufferKey)) {
+    this.buffer[bufferKey] = new Type(key, tags, host);
+}
+
+this.buffer[bufferKey].<span class="apidocCodeKeywordSpan">addPoint</span>(value);
+};
+
+Aggregator.prototype.flush = function() {
+var series = [];
+for (var key in this.buffer) {
+    if (this.buffer.hasOwnProperty(key)) {
+        series = series.concat(this.buffer[key].flush());
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.datadog-metrics.BufferedMetricsLogger.prototype.flush" id="apidoc.module.datadog-metrics.BufferedMetricsLogger.prototype.flush">module datadog-metrics.BufferedMetricsLogger.prototype.flush</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.flush.flush" id="apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.flush.flush">
+        function <span class="apidocSignatureSpan">datadog-metrics.BufferedMetricsLogger.prototype.</span>flush
+        <span class="apidocSignatureSpan">(onSuccess, onError)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">flush = function (onSuccess, onError) {
+    var series = this.aggregator.flush();
+    if (series.length &#x3e; 0) {
+        debug(&#x27;Flushing %d metrics to DataDog&#x27;, series.length);
+        this.reporter.report(series, onSuccess, onError);
+    } else {
+        debug(&#x27;Nothing to flush&#x27;);
+    }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+```js
+metrics.histogram(&#x27;test.service_time&#x27;, 0.248);
+```
+
+### Flushing
+
+`metrics.<span class="apidocCodeKeywordSpan">flush</span>([onSuccess[, onError]])`
+
+Calling `flush` sends any buffered metrics to DataDog. Unless you set
+`flushIntervalSeconds` to 0 it won&#x27;t be necessary to call this function.
+
+It can be useful to trigger a manual flush by calling if you want to
+make sure pending metrics have been sent before you quit the application
+process, for example.
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.datadog-metrics.BufferedMetricsLogger.prototype.gauge" id="apidoc.module.datadog-metrics.BufferedMetricsLogger.prototype.gauge">module datadog-metrics.BufferedMetricsLogger.prototype.gauge</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.gauge.gauge" id="apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.gauge.gauge">
+        function <span class="apidocSignatureSpan">datadog-metrics.BufferedMetricsLogger.prototype.</span>gauge
+        <span class="apidocSignatureSpan">(key, value, tags)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">gauge = function (key, value, tags) {
+    this.addPoint(Gauge, key, value, tags);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+Save the following into a file named `example_app.js`:
+```js
+var metrics = require(&#x27;datadog-metrics&#x27;);
+metrics.init({ host: &#x27;myhost&#x27;, prefix: &#x27;myapp.&#x27; });
+
+function collectMemoryStats() {
+    var memUsage = process.memoryUsage();
+    metrics.<span class="apidocCodeKeywordSpan">gauge</span>(&#x27;memory.rss&#x27;, memUsage.rss);
+    metrics.gauge(&#x27;memory.heapTotal&#x27;, memUsage.heapTotal);
+    metrics.gauge(&#x27;memory.heapUsed&#x27;, memUsage.heapUsed);
+};
+
+setInterval(collectMemoryStats, 5000);
+```
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.datadog-metrics.BufferedMetricsLogger.prototype.histogram" id="apidoc.module.datadog-metrics.BufferedMetricsLogger.prototype.histogram">module datadog-metrics.BufferedMetricsLogger.prototype.histogram</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.histogram.histogram" id="apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.histogram.histogram">
+        function <span class="apidocSignatureSpan">datadog-metrics.BufferedMetricsLogger.prototype.</span>histogram
+        <span class="apidocSignatureSpan">(key, value, tags)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">histogram = function (key, value, tags) {
+    this.addPoint(Histogram, key, value, tags);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+```js
+metrics.increment(&#x27;test.requests_served&#x27;);
+metrics.increment(&#x27;test.awesomeness_factor&#x27;, 10);
+```
+
+### Histograms
+
+`metrics.<span class="apidocCodeKeywordSpan">histogram</span>(key, value[, tags])`
+
+Sample a histogram value. Histograms will produce metrics that
+describe the distribution of the recorded values, namely the minimum,
+maximum, average, count and the 75th, 85th, 95th and 99th percentiles.
+Optionally, specify a list of *tags* to associate with the metric.
+
+Example:
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.datadog-metrics.BufferedMetricsLogger.prototype.increment" id="apidoc.module.datadog-metrics.BufferedMetricsLogger.prototype.increment">module datadog-metrics.BufferedMetricsLogger.prototype.increment</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.increment.increment" id="apidoc.element.datadog-metrics.BufferedMetricsLogger.prototype.increment.increment">
+        function <span class="apidocSignatureSpan">datadog-metrics.BufferedMetricsLogger.prototype.</span>increment
+        <span class="apidocSignatureSpan">(key, value, tags)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">increment = function (key, value, tags) {
+    this.addPoint(Counter, key, value || 1, tags);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+```js
+metrics.gauge(&#x27;test.mem_free&#x27;, 23);
+```
+
+### Counters
+
+`metrics.<span class="apidocCodeKeywordSpan">increment</span>(key[, value[, tags]])`
+
+Increment the counter by the given *value* (or `1` by default). Optionally,
+specify a list of *tags* to associate with the metric. This is useful for
+counting things such as incrementing a counter each time a page is requested.
+
+Example:
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.datadog-metrics.aggregators" id="apidoc.module.datadog-metrics.aggregators">module datadog-metrics.aggregators</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.aggregators.Aggregator" id="apidoc.element.datadog-metrics.aggregators.Aggregator">
+        function <span class="apidocSignatureSpan">datadog-metrics.aggregators.</span>Aggregator
+        <span class="apidocSignatureSpan">(defaultTags)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Aggregator(defaultTags) {
+    this.buffer = {};
+    this.defaultTags = defaultTags || [];
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.datadog-metrics.flush" id="apidoc.module.datadog-metrics.flush">module datadog-metrics.flush</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.flush.flush" id="apidoc.element.datadog-metrics.flush.flush">
+        function <span class="apidocSignatureSpan">datadog-metrics.</span>flush
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">flush = function () { [native code] }</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+```js
+metrics.histogram(&#x27;test.service_time&#x27;, 0.248);
+```
+
+### Flushing
+
+`metrics.<span class="apidocCodeKeywordSpan">flush</span>([onSuccess[, onError]])`
+
+Calling `flush` sends any buffered metrics to DataDog. Unless you set
+`flushIntervalSeconds` to 0 it won&#x27;t be necessary to call this function.
+
+It can be useful to trigger a manual flush by calling if you want to
+make sure pending metrics have been sent before you quit the application
+process, for example.
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.datadog-metrics.gauge" id="apidoc.module.datadog-metrics.gauge">module datadog-metrics.gauge</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.gauge.gauge" id="apidoc.element.datadog-metrics.gauge.gauge">
+        function <span class="apidocSignatureSpan">datadog-metrics.</span>gauge
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">gauge = function () { [native code] }</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+Save the following into a file named `example_app.js`:
+```js
+var metrics = require(&#x27;datadog-metrics&#x27;);
+metrics.init({ host: &#x27;myhost&#x27;, prefix: &#x27;myapp.&#x27; });
+
+function collectMemoryStats() {
+    var memUsage = process.memoryUsage();
+    metrics.<span class="apidocCodeKeywordSpan">gauge</span>(&#x27;memory.rss&#x27;, memUsage.rss);
+    metrics.gauge(&#x27;memory.heapTotal&#x27;, memUsage.heapTotal);
+    metrics.gauge(&#x27;memory.heapUsed&#x27;, memUsage.heapUsed);
+};
+
+setInterval(collectMemoryStats, 5000);
+```
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.datadog-metrics.histogram" id="apidoc.module.datadog-metrics.histogram">module datadog-metrics.histogram</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.histogram.histogram" id="apidoc.element.datadog-metrics.histogram.histogram">
+        function <span class="apidocSignatureSpan">datadog-metrics.</span>histogram
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">histogram = function () { [native code] }</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+```js
+metrics.increment(&#x27;test.requests_served&#x27;);
+metrics.increment(&#x27;test.awesomeness_factor&#x27;, 10);
+```
+
+### Histograms
+
+`metrics.<span class="apidocCodeKeywordSpan">histogram</span>(key, value[, tags])`
+
+Sample a histogram value. Histograms will produce metrics that
+describe the distribution of the recorded values, namely the minimum,
+maximum, average, count and the 75th, 85th, 95th and 99th percentiles.
+Optionally, specify a list of *tags* to associate with the metric.
+
+Example:
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.datadog-metrics.increment" id="apidoc.module.datadog-metrics.increment">module datadog-metrics.increment</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.increment.increment" id="apidoc.element.datadog-metrics.increment.increment">
+        function <span class="apidocSignatureSpan">datadog-metrics.</span>increment
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">increment = function () { [native code] }</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+```js
+metrics.gauge(&#x27;test.mem_free&#x27;, 23);
+```
+
+### Counters
+
+`metrics.<span class="apidocCodeKeywordSpan">increment</span>(key[, value[, tags]])`
+
+Increment the counter by the given *value* (or `1` by default). Optionally,
+specify a list of *tags* to associate with the metric. This is useful for
+counting things such as incrementing a counter each time a page is requested.
+
+Example:
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.datadog-metrics.init" id="apidoc.module.datadog-metrics.init">module datadog-metrics.init</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.init.init" id="apidoc.element.datadog-metrics.init.init">
+        function <span class="apidocSignatureSpan">datadog-metrics.</span>init
+        <span class="apidocSignatureSpan">(opts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function init(opts) {
+    opts = opts || {};
+    opts.flushIntervalSeconds = opts.flushIntervalSeconds || 15;
+    sharedLogger = new loggers.BufferedMetricsLogger(opts);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+## Example
+
+![](header.png)
+
+Save the following into a file named `example_app.js`:
+```js
+var metrics = require(&#x27;datadog-metrics&#x27;);
+metrics.<span class="apidocCodeKeywordSpan">init</span>({ host: &#x27;myhost&#x27;, prefix: &#x27;myapp.&#x27; });
+
+function collectMemoryStats() {
+    var memUsage = process.memoryUsage();
+    metrics.gauge(&#x27;memory.rss&#x27;, memUsage.rss);
+    metrics.gauge(&#x27;memory.heapTotal&#x27;, memUsage.heapTotal);
+    metrics.gauge(&#x27;memory.heapUsed&#x27;, memUsage.heapUsed);
+};
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.datadog-metrics.loggers" id="apidoc.module.datadog-metrics.loggers">module datadog-metrics.loggers</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.loggers.BufferedMetricsLogger" id="apidoc.element.datadog-metrics.loggers.BufferedMetricsLogger">
+        function <span class="apidocSignatureSpan">datadog-metrics.loggers.</span>BufferedMetricsLogger
+        <span class="apidocSignatureSpan">(opts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function BufferedMetricsLogger(opts) {
+    this.aggregator = opts.aggregator || new Aggregator(opts.defaultTags);
+    this.reporter = opts.reporter || new DataDogReporter(opts.apiKey, opts.appKey);
+    this.host = opts.host;
+    this.prefix = opts.prefix || &#x27;&#x27;;
+    this.flushIntervalSeconds = opts.flushIntervalSeconds;
+
+    if (this.flushIntervalSeconds) {
+        debug(&#x27;Auto-flushing every %d seconds&#x27;, this.flushIntervalSeconds);
+    } else {
+        debug(&#x27;Auto-flushing is disabled&#x27;);
+    }
+
+    var self = this;
+    var autoFlushCallback = function() {
+        self.flush();
+        if (self.flushIntervalSeconds) {
+            var interval = self.flushIntervalSeconds * 1000;
+            var tid = setTimeout(autoFlushCallback, interval);
+            // Let the event loop exit if this is the only active timer.
+            tid.unref();
+        }
+    };
+
+    autoFlushCallback();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+#### Use case #3: Must. Control. Everything.
+
+If you need even more control you can create one or more `BufferedMetricsLogger` instances and manage them yourself:
+
+```js
+var metrics = require(&#x27;datadog-metrics&#x27;);
+var metricsLogger = new metrics.<span class="apidocCodeKeywordSpan">BufferedMetricsLogger</span>({
+    apiKey: &#x27;TESTKEY&#x27;,
+    host: &#x27;myhost&#x27;,
+    prefix: &#x27;myapp.&#x27;,
+    flushIntervalSeconds: 15,
+    defaultTags: [&#x27;env:staging&#x27;, &#x27;region:us-east-1&#x27;]
+});
+metricsLogger.gauge(&#x27;mygauge&#x27;, 42);
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.datadog-metrics.metrics" id="apidoc.module.datadog-metrics.metrics">module datadog-metrics.metrics</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.metrics.Counter" id="apidoc.element.datadog-metrics.metrics.Counter">
+        function <span class="apidocSignatureSpan">datadog-metrics.metrics.</span>Counter
+        <span class="apidocSignatureSpan">(key, tags, host)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Counter(key, tags, host) {
+    Metric.call(this, key, tags, host);
+    this.value = 0;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.metrics.Gauge" id="apidoc.element.datadog-metrics.metrics.Gauge">
+        function <span class="apidocSignatureSpan">datadog-metrics.metrics.</span>Gauge
+        <span class="apidocSignatureSpan">(key, tags, host)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Gauge(key, tags, host) {
+    Metric.call(this, key, tags, host);
+    this.value = 0;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.metrics.Histogram" id="apidoc.element.datadog-metrics.metrics.Histogram">
+        function <span class="apidocSignatureSpan">datadog-metrics.metrics.</span>Histogram
+        <span class="apidocSignatureSpan">(key, tags, host)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Histogram(key, tags, host) {
+    Metric.call(this, key, tags, host);
+    this.min = Infinity;
+    this.max = -Infinity;
+    this.sum = 0;
+    this.count = 0;
+    this.samples = [];
+    this.percentiles = [0.75, 0.85, 0.95, 0.99];
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.metrics.Metric" id="apidoc.element.datadog-metrics.metrics.Metric">
+        function <span class="apidocSignatureSpan">datadog-metrics.metrics.</span>Metric
+        <span class="apidocSignatureSpan">(key, tags, host)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Metric(key, tags, host) {
+    this.key = key;
+    this.tags = tags || [];
+    this.host = host || &#x27;&#x27;;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.datadog-metrics.reporters" id="apidoc.module.datadog-metrics.reporters">module datadog-metrics.reporters</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.reporters.DataDogReporter" id="apidoc.element.datadog-metrics.reporters.DataDogReporter">
+        function <span class="apidocSignatureSpan">datadog-metrics.reporters.</span>DataDogReporter
+        <span class="apidocSignatureSpan">(apiKey, appKey)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function DataDogReporter(apiKey, appKey) {
+    apiKey = apiKey || process.env.DATADOG_API_KEY;
+    appKey = appKey || process.env.DATADOG_APP_KEY;
+
+    if (!apiKey) {
+        throw new Error(&#x27;DATADOG_API_KEY environment variable not set&#x27;);
+    }
+
+    // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
+    dogapi.initialize({api_key: apiKey, app_key: appKey});
+    // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.datadog-metrics.reporters.NullReporter" id="apidoc.element.datadog-metrics.reporters.NullReporter">
+        function <span class="apidocSignatureSpan">datadog-metrics.reporters.</span>NullReporter
+        <span class="apidocSignatureSpan">(apiKey, appKey)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function NullReporter(apiKey, appKey) {
+
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>

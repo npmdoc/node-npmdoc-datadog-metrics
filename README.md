@@ -1,6 +1,7 @@
 # npmdoc-datadog-metrics
 
-api documentation for  [datadog-metrics (v0.4.0)](https://github.com/dbader/node-datadog-metrics#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-datadog-metrics.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-datadog-metrics) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-datadog-metrics.svg)](https://travis-ci.org/npmdoc/node-npmdoc-datadog-metrics)
+#### basic api documentation for  [datadog-metrics (v0.4.0)](https://github.com/dbader/node-datadog-metrics#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-datadog-metrics.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-datadog-metrics) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-datadog-metrics.svg)](https://travis-ci.org/npmdoc/node-npmdoc-datadog-metrics)
+
 #### Buffered metrics reporting via the DataDog HTTP API
 
 [![NPM](https://nodei.co/npm/datadog-metrics.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/datadog-metrics)
@@ -71,7 +72,8 @@ api documentation for  [datadog-metrics (v0.4.0)](https://github.com/dbader/node
     "scripts": {
         "test": "mocha --reporter spec && ./node_modules/.bin/jshint --reporter node_modules/jshint-stylish-ex/stylish.js *.js ./lib/*.js ./test/*.js && ./node_modules/.bin/jscs --config .jscsrc *.js ./lib/*.js ./test/*.js"
     },
-    "version": "0.4.0"
+    "version": "0.4.0",
+    "bin": {}
 }
 ```
 
